@@ -25,40 +25,40 @@ class MainWindow(QtWidgets.QMainWindow):
         l.addLayout(palette)
 
         self.setCentralWidget(w)
-m
+
     def add_palette_buttons(self, layout):
         for c in COLORS:
             b = QPaletteButton(c)
             b.pressed.connect(lambda c=c: self.canvas.set_pen_color(c))
             layout.addWidget(b)
 
-    # def mouseMoveEvent(self, e: QtGui.QMouseEvent) -> None:
-    #     if self.last_x is None:  # First event.
-    #         self.last_x = e.x()
-    #         self.last_y = e.y()
-    #         return  # Ignore the first time.
-    #
-    #     painter = QtGui.QPainter(self.label.pixmap())
-    #     painter.drawLine(self.last_x, self.last_y, e.x(), e.y())
-    #     painter.end()
-    #     self.update()
-    #
-    #     # Update the origin for next time.
-    #     self.last_x = e.x()
-    #     self.last_y = e.y()
-    #
-    # def mouseReleaseEvent(self, e):
-    #     self.last_x = None
-    #     self.last_y = None
-    #
-    # def draw_something(self):
-    #     painter = QtGui.QPainter(self.label.pixmap())
-    #     pen = QtGui.QPen()
-    #     pen.setWidth(40)
-    #     pen.setColor(QtGui.QColor('red'))
-    #     painter.setPen(pen)
-    #     painter.drawPoint(200, 150)
-    #     painter.end()
+    def mouseMoveEvent(self, e: QtGui.QMouseEvent) -> None:
+        if self.last_x is None:  # First event.
+            self.last_x = e.x()
+            self.last_y = e.y()
+            return  # Ignore the first time.
+
+        painter = QtGui.QPainter(self.label.pixmap())
+        painter.drawLine(self.last_x, self.last_y, e.x(), e.y())
+        painter.end()
+        self.update()
+
+        # Update the origin for next time.-
+        self.last_x = e.x()
+        self.last_y = e.y()
+
+    def mouseReleaseEvent(self, e):
+        self.last_x = None
+        self.last_y = None
+
+    def draw_something(self):
+        painter = QtGui.QPainter(self.label.pixmap())
+        pen = QtGui.QPen()
+        pen.setWidth(40)
+        pen.setColor(QtGui.QColor('red'))
+        painter.setPen(pen)
+        painter.drawPoint(200, 150)
+        painter.end()
 
 
 class Canvas(QtWidgets.QLabel):
